@@ -1,23 +1,27 @@
-let planes = []
-let numPlanes = 4000;
+let airFields = [];
 
 function setup() {
     createCanvas(1000, 1000);
-
-
-    for(let i=0; i< numPlanes; i++){
-    planes.push(new Aeroplane())
-    }
-    
     angleMode(DEGREES);
+    rectMode(CENTER);
+    airFields.push(new Airfield({
+      numPlanes: 1000,
+      airFieldPosX: 250}))
+
+    airFields.push(new Airfield({
+      numPlanes: 1000,
+      airFieldPosX: 750
+    }))
   }
   
 function draw() {
+    background(80, 207, 230);
 
-    background(80, 207, 230)
-
-    for(let i=0; i<numPlanes; i++){
-        planes[i].renderAeroplane();
-        planes[i].movePlane();
+    for (i = 0; i < airFields.length; i++) {
+    airFields[i].renderAirfield();
+    airFields[i].renderPlanes();
+    airFields[i].movePlanes();
+    airFields[i].checkPos();
     }
+
   }

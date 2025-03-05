@@ -1,15 +1,15 @@
 class Aeroplane {
     
-    constructor(){
-        this.posX = random(0, 1000);
-        this.posY = random(0, 1000);
-        this.planeColour1 = random(100,255);
-        this.planeColour2 = random(100,255);
-        this.planeColour3 = random(100,255);
+    constructor(obj){
+        this.posX = obj.posX ?? random(0, 1000);
+        this.posY = obj.posY ?? random(0, 1000);
+        this.planeColour1 = obj.planeColour1 || random(200,255);
+        this.planeColour2 = obj.planeColour2 || random(200,255);
+        this.planeColour3 = obj.planeColour2 || random(200,255);
 
-        this.apWidth = 50;
-        this.apHeight = 20;
-        this.tail = 40;
+        this.apWidth = obj.apWidth || 50;
+        this.apHeight = obj.apHeight || 20;
+        this.tail = obj.tail || 40;
 
         this.velX = random(-3, 3);
         this.velY = random(-3, 3);
@@ -34,8 +34,26 @@ class Aeroplane {
         pop()
     }
 
+    //Needs to be moved to airfield
+    // checkPos(){
+    //     if (this.posX > 1000){
+    //         this.posX = 0;
+    //         this.posY = map(this.posY,0,1000,1000,0)
+    //     } else if (this.posY < 0){
+    //         this.posX = 1000;
+    //         this.posY = map(this.posY,0,1000,1000,0)
+    //     }       
+    // }
+ 
+
     movePlane(){
         this.posX = this.posX + this.velX;
         this.posY = this.posY + this.velY;
     }
+    
+    
+    // reversePlane(){
+    //     this.posX = this.posX - this.velX;
+    //     this.posY = this.posY - this.velY;
+    // }
 }
