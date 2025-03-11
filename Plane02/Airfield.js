@@ -6,6 +6,7 @@ class Airfield {
         this.posY = obj.posY ?? 100
         this.numPlanes = obj.numPlanes ?? 10;
         this.planes = [];
+        this.alertNum = 0;
         //gen planes will populate planes array 
         this.generatePlanes();
     }
@@ -21,7 +22,6 @@ class Airfield {
 
             this.planes.forEach((plane) => {
                 this.checkPos(plane);
-                plane.renderAlerts();
                 plane.renderPlanes();
                 plane.movePlanes();
 
@@ -66,7 +66,7 @@ class Airfield {
     checkDist(){
         this.planes.forEach(plane => plane.apAlert = 0);
         
-        let count = 0;
+        // let count = 0;
 
         for (let i=0; i<this.planes.length; i++){
             for (let j=i+1; j<this.planes.length; j++){
@@ -77,10 +77,12 @@ class Airfield {
                 if(dist < 40){
                     planeA.apAlert = true;
                     planeB.apAlert = true;
+                    this.alertNum = this.alertNum + 1;
+                    console.log('Collisions' + this.alertNum);
                 }
-                console.log('The distance of this plane is: ' + dist);
-                count++
-                console.log(count);
+                // console.log('The distance of this plane is: ' + dist);
+                // count++
+                // console.log(count);
             }
         }
     }

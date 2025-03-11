@@ -15,7 +15,6 @@ class Plane {
 
         //Alert System
         this.apAlert = false;
-        this.apAlertCount = 0;
     }
 
     renderPlanes() {
@@ -49,13 +48,6 @@ class Plane {
 
         pop()
 
-    }
-
-    renderAlerts(){
-        stroke(0,0,0);
-        fill(0,0,0);
-        textSize(15);
-        text('Number of collisions ' + this.apAlertCount, 0, 0)
     }
 
     movePlanes() {
