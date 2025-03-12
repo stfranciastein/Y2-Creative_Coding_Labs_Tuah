@@ -5,41 +5,60 @@ class Airfield {
         this.posX = obj.posX ?? 100
         this.posY = obj.posY ?? 100
         this.numPlanes = obj.numPlanes ?? 10;
+
         this.planes = [];
-        this.alertNum = 0;
         //gen planes will populate planes array 
         this.generatePlanes();
-    }
 
+    }
 
     renderAirfield() {
         push();
             translate(this.posX, this.posY);
-            noStroke()
+            stroke(255);
             fill(120, 200, 255)
             rect(0, 0, this.width, this.height);
-
-
-            this.planes.forEach((plane) => {
-                this.checkPos(plane);
-                plane.renderPlanes();
-                plane.movePlanes();
-
-            });
         pop();
+    }
 
+    renderPlanes() {
+        push();
+        translate(this.airFieldPosX, this.airFieldPosY); 
+        fill(0, 50, 0);
+        console.log(planes);
+        this.planes.forEach((plane,id) => {
+            plane.render(id);
+            console.log(id);
+        });
+        pop();
+    }
+
+    movePlanes(){
+        this.planes.forEach(plane => {
+            this.checkPos(plane);
+            plane.move();
+        })
     }
 
     generatePlanes() {
         for (let i = 0; i < this.numPlanes; i++) {
-            this.planes.push(new Plane({
-                //sending an object
-                posX: random(0, this.width),
-                posY: random(0, this.height),
-                valX: random(-1, 1),
-                valY: random(-1, 1),
-            }))
+            let x = random(-this.width / 2, this.width / 2);
+            let y = random(-this.height / 2, this.height / 2);
+
+            this.planes.push(new Plane (x, y));
         }
+    }
+    
+
+    renderPlanes() {
+        push();
+        translate(this.posX, this.posY);
+        fill(0, 50, 0);
+        this.planes.forEach((plane,id) => {
+            plane.renderPlanes(id);
+            // console.log('Test');
+        });
+        pop();
     }
 
     checkPos(plane) {
@@ -75,10 +94,12 @@ class Airfield {
                 let dist = sqrt((sq(planeA.posX - planeB.posX) + (sq(planeA.posY - planeB.posY))));
 
                 if(dist < 40){
-                    planeA.apAlert = true;
-                    planeB.apAlert = true;
-                    this.alertNum = this.alertNum + 1;
-                    console.log('Collisions' + this.alertNum);
+                    planeA.apAlert = 1;
+                    planeB.apAlert = 1;
+                }
+                else if (dist < 20) {
+                    planeA.apAlert = 2;
+                    planeB.apAlert = 2;
                 }
                 // console.log('The distance of this plane is: ' + dist);
                 // count++
