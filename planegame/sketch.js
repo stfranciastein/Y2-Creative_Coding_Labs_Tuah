@@ -1,40 +1,75 @@
 let airFields = [];
+let currentCraft = 0;
+let keysHeld = {};
 let moveP;
 
+function setup() {
+    createCanvas(1000, 600);
+    background(255, 0, 0);
+    angleMode(DEGREES);
+    rectMode(CENTER);
 
-function setup(){
-    createCanvas(500,500)
-    background(255,0,0)
-    angleMode(DEGREES)
-    rectMode(CENTER)
-    airFields.push(new airField({
-        
-    }))
-    
+    // Ensure randomness is different each time
+    randomSeed(millis());
+
+    // Spawn two airfields
+    airFields.push(new airField({ airFieldPosY: 300 }));
+    airFields.push(new airField({ airFieldPosX: 600, airFieldPosY: 300 }));
 }
 
-function draw(){
-    background(180, 216, 250)
-    airFields[0].renderAirfield()
-    airFields[0].renderCrafts()
-    airFields[0].moveCrafts()
-    airFields[0].checkpos()
-    airFields[0].checkDis()
-}
+function draw() {
+    background(180, 216, 250);
 
-function keyPressed(){
-    switch(key){
-        case "0": currentPlane=0;break;
-        case "1": currentPlane=1;break;
-        case "2": currentPlane=2;break;
-        case "3": currentPlane=3;break;
-        case "4": currentPlane=4;break;
-        case "5": currentPlane=5;break;
-        case "6": currentPlane=6;break;
-        case "7": currentPlane=7;break;
-        case "8": currentPlane=8;break;
-        case "9": currentPlane=9;break;
+    for (let af of airFields) {
+        af.renderAirfield();
+        af.renderCrafts();
+        af.moveCrafts();
+        af.checkpos();
+        af.checkDis();
     }
-    console.log(currentPlane)
 
+    handleInput();
+}
+
+function keyPressed() {
+    keysHeld[keyCode] = true;
+
+    // Number keys 0–9 to select a craft
+    if (key >= '0' && key <= '9') {
+        let totalCrafts = airFields.reduce((sum, field) => sum + field.crafts.length, 0);
+        currentCraft = constrain(int(key), 0, totalCrafts - 1);
+    }
+}
+
+function keyReleased() {
+    keysHeld[keyCode] = false;
+}
+
+function handleInput() {
+    const selected = getCurrentCraft();
+    if (!selected) return;
+
+    if (keysHeld[LEFT_ARROW]) {
+        selected.turnLeft();
+    }
+    if (keysHeld[RIGHT_ARROW]) {
+        selected.turnRight();
+    }
+    if (keysHeld[UP_ARROW]) {
+        selected.increaseSpeed();
+    }
+    if (keysHeld[DOWN_ARROW]) {
+        selected.decreaseSpeed();
+    }
+}
+
+function getCurrentCraft() {
+    let index = currentCraft;
+    for (let field of airFields) {
+        if (index < field.crafts.length) {
+            return field.crafts[index];
+        }
+        index -= field.crafts.length;
+    }
+    return null;
 }
