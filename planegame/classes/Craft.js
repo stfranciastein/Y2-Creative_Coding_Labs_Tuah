@@ -40,7 +40,7 @@ class Craft {
     }
 
     _renderBaseShape() {
-        fill(100);
+        fill(255,255,0);
         ellipse(0, 0, this.apWidth - 10); // default circle shape
     }
 
@@ -57,26 +57,36 @@ class Craft {
                 fill(255,0,0);
                 textSize(12);
                 stroke(0);
-                text("Collision Alert", 0, - (this.apWidth + 10));
+                text("Collision Alert", 50, -10);
             pop();
         }
         
         push();
         translate(this.pos.x, this.pos.y);
         textSize(15);
-        text(id, 10, -10);
+        stroke(0);
+        if (isSelected ){
+            noFill();
+            stroke(255, 255, 0);
+            strokeWeight(3);
+            ellipse(0, 0, this.apWidth + 20);
+            
+            fill(255);
+            stroke(0);
+            strokeWeight(1);
+            text("Your Flight", 10, -20);
+        }
+        else {
+            text("Flight 00" + id, 10, -20);
+        }
+
 
         rotate(this.angle);
         strokeWeight(2);
 
         this._renderBaseShape();
 
-        if (isSelected) {
-            noFill();
-            stroke(255, 255, 0);
-            strokeWeight(3);
-            ellipse(0, 0, this.apWidth + 15);
-        }
+
         pop();
     }
 

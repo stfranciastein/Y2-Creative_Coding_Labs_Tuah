@@ -2,23 +2,34 @@ let airFields = [];
 let currentCraft = 0;
 let keysHeld = {};
 let moveP;
+let canvasWidth = 1000;
+let canvasHeight = 1000;
+
 
 function setup() {
-    createCanvas(1000, 600);
-    background(255, 0, 0);
+    createCanvas(canvasWidth, canvasHeight);
     angleMode(DEGREES);
     rectMode(CENTER);
 
-    // Ensure randomness is different each time
-    randomSeed(millis());
+    // //2 Airfields
+    // airFields.push(new airField({ 
+    //     airFieldPosY: 300 }));
 
-    // Spawn two airfields
-    airFields.push(new airField({ airFieldPosY: 300 }));
-    airFields.push(new airField({ airFieldPosX: 600, airFieldPosY: 300 }));
+    // airFields.push(new airField({ 
+    //     airFieldPosX: 600, 
+    //     airFieldPosY: 300 }));
+
+    //1 Airfield (for submission appearance)
+    airFields.push(new airField({
+        airFieldPosX: canvasWidth / 2,
+        airFieldPosY: canvasHeight / 2,
+        width: 500,
+        height: 500
+    }))
 }
 
 function draw() {
-    background(180, 216, 250);
+    background(0);
 
     for (let af of airFields) {
         af.renderAirfield();

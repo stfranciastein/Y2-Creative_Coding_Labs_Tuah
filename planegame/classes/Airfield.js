@@ -1,6 +1,6 @@
 class airField{
     constructor(obj){
-        this.numCrafts = obj.numCrafts ?? 4;
+        this.numCrafts = obj.numCrafts ?? 5; // Where craft number is decided
         this.width = obj.width ?? 250;
         this.height = obj.height ?? 250;
         this.airFieldPosX = obj.airFieldPosX ?? 250;
@@ -9,14 +9,36 @@ class airField{
         this.genCrafts();
     }
 
-    renderAirfield(){
+    renderAirfield() {
         push();
-        translate(this.airFieldPosX,this.airFieldPosY)
-        fill(169, 169, 169);
-        rect(0,0,this.width,this.height)
-       
-        pop()
+        translate(this.airFieldPosX, this.airFieldPosY);
+    
+        // Background: dark greenish radar screen
+        fill(10, 40, 10);
+        stroke(0, 100, 0);
+        strokeWeight(2);
+        rect(0, 0, this.width, this.height);
+    
+        // Grid lines for a radar feel
+        stroke(0, 150, 0, 80);
+        strokeWeight(1);
+    
+        for (let x = -this.width / 2; x <= this.width / 2; x += 25) {
+            line(x, -this.height / 2, x, this.height / 2);
+        }
+    
+        for (let y = -this.height / 2; y <= this.height / 2; y += 25) {
+            line(-this.width / 2, y, this.width / 2, y);
+        }
+    
+        // Crosshair lines
+        stroke(0, 255, 0, 100);
+        line(0, -this.height / 2, 0, this.height / 2);
+        line(-this.width / 2, 0, this.width / 2, 0);
+    
+        pop();
     }
+    
 
     renderCrafts(){
         push();
