@@ -76,7 +76,7 @@ function drawGameOver() {
     textSize(20);
     noStroke();
     text("Time Survived: " + nf(finalScore, 0, 2) + "s", width / 2, height / 2 - 20);
-    text("You capsized at level: " + level, width / 2, height / 2 + 20);
+    text("You capsized at level " + level, width / 2, height / 2 + 20);
     text("Continue? [Y]", width / 2, height / 2 + 100);
     text("Press [R] to Return to Menu", width / 2, height / 2 + 230);
     
