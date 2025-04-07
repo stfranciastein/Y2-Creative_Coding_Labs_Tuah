@@ -11,15 +11,21 @@ class Rock extends Debris {
     }
   
     show() {
-      fill(100);
-      beginShape();
-      for (let pt of this.shape) {
-        let x = this.x + cos(pt.angle) * pt.radius;
-        let y = this.y + sin(pt.angle) * pt.radius;
-        vertex(x, y);
+        stroke(192, 0, 255);
+        strokeWeight(2);
+        fill(55,0,155);
+        
+        beginShape();
+            for (let pt of this.shape) {
+            let x = this.x + cos(pt.angle) * pt.radius;
+            let y = this.y + sin(pt.angle) * pt.radius;
+            vertex(x, y);
+            }
+        endShape(CLOSE);
+      
+        noStroke();
       }
-      endShape(CLOSE);
-    }
+      
   
     hits(boat) {
       return (
