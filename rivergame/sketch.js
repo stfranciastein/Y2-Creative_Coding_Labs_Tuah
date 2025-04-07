@@ -33,6 +33,8 @@ let targetWaveStrength = 10;
 //Assets
 let font1;
 let menu1;
+let music1;
+let music2;
 
 //These are for powers
 let barWidth = 100;
@@ -44,6 +46,8 @@ let barY = 60;
 function preload() {
     font1 = loadFont('assets/fonts/PressStart2P-Regular.ttf');
     menu1 = loadImage('assets/images/Menu.png');
+    music1 = loadSound('assets/music/menu.mp3');
+    music2 = loadSound('assets/music/game.mp3');
   }
   
 
@@ -367,6 +371,12 @@ function drawGameOver() {
 function keyPressed() {
   if (showMainMenu && key === ' ') {
     showMainMenu = false;
+    //Apparently you can't make music play automatically on Firefox so this will have to do.
+    if (!music1.isPlaying()) { 
+        music1.setVolume(0.01);
+        music1.setLoop(true);
+        music1.play();
+    }
     return;
   }
 
@@ -386,6 +396,18 @@ function keyPressed() {
       boat = new Boat(boatType, selectedColor);
       selected = true;
       startTime = millis();
+
+        // Stop menu music
+        if (music1.isPlaying()) {
+        music1.stop();
+        }
+
+        // Start gameplay music
+        if (!music2.isPlaying()) {
+        music2.setVolume(0.01);
+        music2.setLoop(true);
+        music2.play();
+        }
     }
     return;
   }
@@ -397,10 +419,22 @@ function keyPressed() {
       gameOver = false;
       debris = [];
       coinsCollected = 0;
-      return;
+
+    // Stop gameplay music
+    if (music2.isPlaying()) {
+      music2.stop();
+    }
+
+    // Restart menu music
+    if (!music1.isPlaying()) {
+      music1.setVolume(0.01);
+      music1.setLoop(true);
+      music1.play();
+    }
+    return;
     }
   
-    // Some logic to make use of coins, you can now revive with 
+    // Some logic to make use of coins, you can now revive with them
     if (key === 'y' || key === 'Y') {
       if (coinsCollected >= 2) {
         coinsCollected -= 2;
