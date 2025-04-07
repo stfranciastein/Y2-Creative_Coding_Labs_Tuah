@@ -13,13 +13,12 @@ class airField{
         push();
         translate(this.airFieldPosX, this.airFieldPosY);
     
-        // Background: dark greenish radar screen
+        ////////////////////////////////////////////////////////////////////
+        // Radar
         fill(10, 40, 10);
         stroke(0, 100, 0);
         strokeWeight(2);
         rect(0, 0, this.width, this.height);
-    
-        // Grid lines for a radar feel
         stroke(0, 150, 0, 80);
         strokeWeight(1);
     
@@ -35,6 +34,7 @@ class airField{
         stroke(0, 255, 0, 100);
         line(0, -this.height / 2, 0, this.height / 2);
         line(-this.width / 2, 0, this.width / 2, 0);
+        ////////////////////////////////////////////////////////////////////////
     
         pop();
     }

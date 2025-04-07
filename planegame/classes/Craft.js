@@ -1,7 +1,7 @@
 class Craft {
     constructor(obj) {
         this.pos = createVector(obj.posX ?? 250, obj.posY ?? 250);
-        this.speed = obj.speed ?? random(0.2, 3);
+        this.speed = obj.speed ?? random(0.2, 0.5);
         this.angle = obj.angle ?? random(0, 360);
 
         this.apWidth = obj.apWidth ?? 25;
