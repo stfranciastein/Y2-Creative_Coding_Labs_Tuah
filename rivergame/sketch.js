@@ -22,6 +22,8 @@ let safeZoneStart = 0; // Counts down from the number you defined in the safe zo
 let selectedColor = 'white';
 const colors = ['white', 'red', 'green', 'blue'];
 let colorIndex = 0;
+let verticalScroll = 0; // new: to simulate vertical background motion
+
 
 //For in-game bg
 let gridOffset = 0;
@@ -97,14 +99,17 @@ function draw() {
 
         //Sin wave from someone's sketch on p5 repurposed to fit game
         // https://editor.p5js.org/stevenraysimon/sketches/HyTseadOg <== Original sketch
+        verticalScroll += 1.5; // control scroll speed here
+
         for (let y = 0; y < height; y += 20) {
-        beginShape();
-        for (let x = 0; x < width; x += 10) {
-            let wave = sin((x - gridOffset) * 0.01) * currentWaveStrength; // The formula inside the sin needs to be a - because otherwise it displays the waves backwards           
-            vertex(x, y + wave);
+            beginShape();
+            for (let x = 0; x < width; x += 10) {
+                let wave = sin((x - gridOffset) * 0.01) * currentWaveStrength;
+                vertex(x, y + wave + verticalScroll % 20); // scrolls downward
+            }
+            endShape();
         }
-        endShape();
-        }
+        
 
         // Vertical grid lines across entire screen
         for (let x = 0; x <= width; x += 40) {

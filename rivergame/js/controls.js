@@ -56,6 +56,7 @@ function keyPressed() {
         gameOver = false;
         debris = [];
         coinsCollected = 0;
+        level = 1;
   
         // Stop gameplay music
         if (music2.isPlaying()) {
