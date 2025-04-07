@@ -76,6 +76,7 @@ class Boat {
       this.abilityActive = true;
       this.abilityStart = millis();
       this.lastUsed = millis();
+      sfxpower.play();
     }
   
     showAbilityEffect() {
@@ -84,32 +85,34 @@ class Boat {
       if (this.type === "default") {
             // Vanguard
             push();
-            noFill();
-            stroke(0, 255, 255);
-            strokeWeight(2);
-            ellipse(this.x, this.y, 200);
+                noFill();
+                stroke(0, 255, 255);
+                strokeWeight(2);
+                ellipse(this.x, this.y, 200);
             pop();
         } else if (this.type === "fast") {
             // Stingray
             push();
-            stroke(this.color);
-            strokeWeight(2);
-            line(this.x, this.y + 30, this.x, this.y + 50);
+                stroke(this.color);
+                strokeWeight(2);
+                line(this.x, this.y + 30, this.x, this.y + 50);          // Center tail
+                line(this.x - 8, this.y + 25, this.x - 4, this.y + 50);  // Left tail
+                line(this.x + 8, this.y + 25, this.x + 4, this.y + 50);  // Right tail
             pop();
         } else if (this.type === "fat") {
             // Bulwark
             push();
-            translate(this.x, this.y);
-            noFill();
-            stroke(255, 140, 0);
-            strokeWeight(3);
-            scale(1.3);
-            beginShape();
-            vertex(0, -40);
-            vertex(20, 20);
-            vertex(0, 30);
-            vertex(-20, 20);
-            endShape(CLOSE);
+                translate(this.x, this.y);
+                noFill();
+                stroke(255, 140, 0);
+                strokeWeight(3);
+                scale(1.3);
+                beginShape();
+                    vertex(0, -40);
+                    vertex(20, 20);
+                    vertex(0, 30);
+                    vertex(-20, 20);
+                endShape(CLOSE);
             pop();
         }
     }
