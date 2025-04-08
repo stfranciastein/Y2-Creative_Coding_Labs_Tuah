@@ -125,7 +125,7 @@ function draw() {
 
     let elapsedTime = (millis() - startTime) / 1000;
     finalScore = elapsedTime;
-    speedMultiplier = 1 + elapsedTime / 60;   //speedMultiplier will increase after x seconds, probably change this to 60
+    speedMultiplier = 1 + elapsedTime / 120;   //speedMultiplier will increase after x seconds, probably change this to 60
   
     // After x seconds have ellapsed playing the game there needs to be a safe zone.
     // Currently as of your latest save you made the safe zone be 10 seconds long.
@@ -243,10 +243,19 @@ function draw() {
 // DEBRIS SPAWNER ///////////////////////////////////////////////////////////////////////////////////////////
 //Checks for debris spawning boolean so coins and hearts no longer spawn after safe zone.
 
-    if (allowDebrisSpawning && millis() > spawnTimer) {
-        debris.push(new Rock());
-        spawnTimer = millis() + random(500, 1000);
-    }
+if (allowDebrisSpawning && millis() > spawnTimer) {
+    debris.push(new Rock());
+
+    // Faster spawns over time: max 1 rock every 100ms after enough time
+    let baseMin = 500;
+    let baseMax = 1000;
+    let scale = constrain(elapsedTime / 60, 0, 1); // full effect after 60 seconds
+    let newMin = lerp(baseMin, 100, scale);
+    let newMax = lerp(baseMax, 200, scale);
+
+    spawnTimer = millis() + random(newMin, newMax);
+}
+
     if (allowDebrisSpawning && millis() > heartSpawnTimer) {
         debris.push(new HeartPickup());
         heartSpawnTimer = millis() + random(15000, 30000);
