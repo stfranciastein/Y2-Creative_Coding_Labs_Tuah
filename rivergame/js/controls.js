@@ -30,7 +30,10 @@ function keyPressed() {
         return;
       }
       if (['1', '2', '3'].includes(key)) {
-        boat = new Boat(boatType, selectedColor);
+        if (boatType === "default") boat = new Vanguard(selectedColor);
+        else if (boatType === "fast") boat = new Stingray(selectedColor);
+        else if (boatType === "fat") boat = new Bulwark(selectedColor);
+
         selected = true;
         startTime = millis();
   
