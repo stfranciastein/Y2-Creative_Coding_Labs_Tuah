@@ -7,7 +7,7 @@ class Bulwark extends Boat {
     }
   
     show() {
-      fill(255);
+      fill(this.color);
       noStroke();
       push();
       translate(this.x, this.y);
