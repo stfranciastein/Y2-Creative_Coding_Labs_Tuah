@@ -13,12 +13,12 @@ class Stingray extends Boat {
         translate(this.x, this.y);
         rotate(radians(this.tiltAngle));
         beginShape();
-        vertex(0, -35);       
-        vertex(20, 20);       
-        vertex(5, 15);        
-        vertex(0, 25);        
-        vertex(-5, 15);       
-        vertex(-20, 20);      
+          vertex(0, -35);       
+          vertex(20, 20);       
+          vertex(5, 15);        
+          vertex(0, 25);        
+          vertex(-5, 15);       
+          vertex(-20, 20);      
         endShape(CLOSE);
       pop();
     }

@@ -1,10 +1,10 @@
 class Boat {
   constructor(color = 'white') {
-    this.x = width / 2;
+    this.x = width / 2; 
     this.y = height - 60;
     this.w = 60;
     this.h = 30;
-    this.xdir = 0;
+    this.xdir = 0; //Screencast Bookmark 1.1
     this.ydir = 0;
     this.color = color;
 
@@ -45,6 +45,7 @@ class Boat {
     }
   }
 
+  // Screencast Bookmark 1.4
   update(wind) {
     if (millis() - this.abilityStart > this.abilityDuration) {
       this.abilityActive = false;

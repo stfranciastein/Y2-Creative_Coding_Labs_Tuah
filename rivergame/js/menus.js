@@ -8,8 +8,9 @@ function drawMainMenu() {
     textAlign(CENTER, CENTER);
     noStroke();
   
-    if (floor(millis() / 500) % 2 === 0) { // 500 = will blink every 500 millis/0.5 secs
-        textSize(20);
+    // 500 = will blink every 500 millis/0.5 secs. Floor just removes the decimals, % the number is even (0), show text
+    textSize(20);
+    if (floor(millis() / 500) % 2 === 0) { 
         fill(255, 230, 255);
         text("Press [SPACE] to Start", width / 2, height / 2 + 20);
     }
@@ -33,8 +34,6 @@ function drawBoatSelection() {
     text("[2]: STINGRAY (2 Hearts, Faster)", width / 2, 250);
     text("[3]: ICEBREAKER (5 Hearts, Slower)", width / 2, 320);
 
-
-
     textSize(10);
     text("Press [C] to change color", width / 2, 500);
     text("Current Color: " + selectedColor, width / 2, 530);
@@ -47,17 +46,17 @@ function drawBoatSelection() {
     text("Press the [ARROW KEYS] to move.", width / 2, 650);
     text("Press [E] to activate your ship's ability.", width / 2, 680);
 
-    // Boat Preview
+    // Boat Preview (copy pasted from Boat)
+    // This is just the shape of the Vanguard
     push();
     translate(width / 2, 450);
     fill(selectedColor);
     beginShape();
-        vertex(0, -40);    // Front (nose)
-        vertex(20, 20);    // Right rear
-        vertex(0, 30);     // Center back
-        vertex(-20, 20);   // Left rear
+        vertex(0, -40);    
+        vertex(20, 20);    
+        vertex(0, 30);     
+        vertex(-20, 20);   
     endShape(CLOSE);
-    
     pop();
 }
 
