@@ -243,19 +243,16 @@ function draw() {
 // DEBRIS SPAWNER ///////////////////////////////////////////////////////////////////////////////////////////
 //Checks for debris spawning boolean so coins and hearts no longer spawn after safe zone.
 
-if (allowDebrisSpawning && millis() > spawnTimer) {
-    debris.push(new Rock());
+    if (allowDebrisSpawning && millis() > spawnTimer) {
+        debris.push(new Rock());
+        let baseMin = 600;
+        let baseMax = 1100;
+        let scale = constrain(elapsedTime / 120, 0, 1); // takes 2 minutes to fully kick in
+        let newMin = lerp(baseMin, 400, scale);
+        let newMax = lerp(baseMax, 800, scale);
 
-    // Faster spawns over time: max 1 rock every 100ms after enough time
-    let baseMin = 500;
-    let baseMax = 1000;
-    let scale = constrain(elapsedTime / 60, 0, 1); // full effect after 60 seconds
-    let newMin = lerp(baseMin, 100, scale);
-    let newMax = lerp(baseMax, 200, scale);
-
-    spawnTimer = millis() + random(newMin, newMax);
-}
-
+        spawnTimer = millis() + random(newMin, newMax);
+    }
     if (allowDebrisSpawning && millis() > heartSpawnTimer) {
         debris.push(new HeartPickup());
         heartSpawnTimer = millis() + random(15000, 30000);
