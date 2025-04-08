@@ -2,6 +2,7 @@
 // the game needs to take control of the boat's velocity again because of the wind (I hate maths)
 function keyPressed() {
     if (key === ' ') {
+      sfxcoin.play();
       if (showMainMenu) {
         showMainMenu = false;
         //Apparently you can't make music play automatically on Firefox so this will have to do.
@@ -87,6 +88,7 @@ function keyPressed() {
       }
     }
   
+    //Screencast Bookmark 1.2
     if (keyCode === LEFT_ARROW) boat.setDirX(-1);
     else if (keyCode === RIGHT_ARROW) boat.setDirX(1);
     else if (keyCode === UP_ARROW) boat.setDirY(-1);
